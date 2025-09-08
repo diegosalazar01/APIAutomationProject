@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="TestsSuite">
+    <test name="CreateUserTests">
+        <classes>
+            <class name="com.automationProject.tests.CreateUserTests"/>
+        </classes>
+    </test>
+    <test name="LoginUserTests">
+        <classes>
+            <class name="com.automationProject.tests.LoginUserTests"/>
+        </classes>
+    </test>
+    <test name="AvailablePetTests">
+        <classes>
+            <class name="com.automationProject.tests.AvailablePetTests"/>
+        </classes>
+    </test>
+    <test name="GetPetByIDTests">
+        <classes>
+            <class name="com.automationProject.tests.GetPetByIDTests"/>
+        </classes>
+    </test>
+    <test name="CreateOrderTests">
+        <classes>
+            <class name="com.automationProject.tests.CreateOrderTests"/>
+        </classes>
+    </test>
+    <test name="LogoutUserTests">
+        <classes>
+            <class name="com.automationProject.tests.LogoutUserTests"/>
+        </classes>
+    </test>
+</suite>
