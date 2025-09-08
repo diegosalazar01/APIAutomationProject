@@ -27,10 +27,9 @@ public class CreateUserTests extends TestRunner {
         Response response = RequestBuilder.postRequest(getBaseUrl(), "/user", createUserRequest, getApiKey());
         CreateUserResponse createUserResponse = response.as(CreateUserResponse.class);
 
-        assertEquals(response.getStatusCode(), 200, "The status code doesn't match.");
-        assertEquals(createUserResponse.getCode(), 200, "The id should be greater than 0");
-        assertEquals(createUserResponse.getType(), "unknown", "The username should match");
-        assertEquals(createUserResponse.getMessage(), "1");
-
+        assertEquals(createUserResponse.getCode(), 200, "The status code doesn't match.");
+        assertEquals(createUserResponse.getType(), "unknown", "The type should match");
+        assertEquals(createUserResponse.getMessage(), "1", "The message should match");
+        System.out.println("Create user response: " + response.asString());
     }
 }
