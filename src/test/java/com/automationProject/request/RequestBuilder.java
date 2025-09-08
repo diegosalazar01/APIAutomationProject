@@ -22,35 +22,6 @@ public class RequestBuilder {
         return  requestSpecification.get(path);
     }
 
-    public static Response getRequest(String baseUrl, String path, String apiKey) {
-        RequestSpecification requestSpecification = RestAssured.given()
-                .baseUri(baseUrl)
-                .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
-                .filter(new RequestLoggingFilter())
-                .filter(new ResponseLoggingFilter());
-
-        if (apiKey != null) {
-            requestSpecification.header("special-key", apiKey);
-        }
-
-        return  requestSpecification.get(path);
-    }
-
-    public static Response getRequest(String baseUrl, String path, Object body, String apiKey) {
-        RequestSpecification requestSpecification = RestAssured.given()
-                .baseUri(baseUrl)
-                .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
-                .filter(new RequestLoggingFilter())
-                .filter(new ResponseLoggingFilter())
-                .body(body);
-
-        if (apiKey != null) {
-            requestSpecification.header("special-key", apiKey);
-        }
-
-        return  requestSpecification.get(path);
-    }
-
     public static Response getRequestWithQueryParams(String baseUrl, String path, Map<String, String> queryParams, String apiKey) {
         RequestSpecification requestSpecification = RestAssured.given()
                 .baseUri(baseUrl)
@@ -59,6 +30,21 @@ public class RequestBuilder {
                 .filter(new RequestLoggingFilter())
                 .filter(new ResponseLoggingFilter())
                 .queryParams(queryParams);
+
+        if (apiKey != null) {
+            requestSpecification.header("special-key", apiKey);
+        }
+
+        return requestSpecification.get();
+    }
+    public static Response getRequestWithQueryParams(String baseUrl, String path, String name,int queryParam, String apiKey) {
+        RequestSpecification requestSpecification = RestAssured.given()
+                .baseUri(baseUrl)
+                .basePath(path)
+                .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .pathParam(name,queryParam);
 
         if (apiKey != null) {
             requestSpecification.header("special-key", apiKey);
@@ -80,21 +66,5 @@ public class RequestBuilder {
         }
 
         return  requestSpecification.post(path);
-    }
-
-    public static Response deleteRequest(String baseUrl, String path, Integer id, String apiKey) {
-        RequestSpecification requestSpecification = RestAssured.given()
-                .baseUri(baseUrl)
-                .basePath(path)
-                .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType())
-                .filter(new RequestLoggingFilter())
-                .filter(new ResponseLoggingFilter())
-                .pathParams("id", id);
-
-        if (apiKey != null) {
-            requestSpecification.header("special-key", apiKey);
-        }
-
-        return  requestSpecification.delete("/{id}");
     }
 }
